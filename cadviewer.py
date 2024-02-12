@@ -36,11 +36,14 @@ class MySceneViewer(trimesh.viewer.windowed.SceneViewer):
         elif symbol == pyglet.window.key.M:
             if shift:
                 tmpfile="/tmp/cadviewer_tmp.obj" # LATER surely I can do better for temp?
+                saved = False
                 view_lock.acquire()
                 if len(meshes) > 0:
                     trimesh.exchange.export.export_mesh(meshes[cur_idx], tmpfile, "obj")
+                    saved = True
                 view_lock.release()
-                os.system("meshlab "+ tmpfile)
+                if saved:
+                    os.system("meshlab "+ tmpfile)
             return # Doesn't really work right, supress.
         elif symbol == pyglet.window.key.F:
             self.toggle_fullscreen()
