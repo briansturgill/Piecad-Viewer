@@ -10,7 +10,7 @@ import os
 view_lock = Lock()
 
 def display_help():
-    from tkinter import Tk, Text
+    from tkinter import Tk, Label
     text_l = [
         "",
         "Key        Action",
@@ -19,6 +19,7 @@ def display_help():
         "c            Toggle culling.",
         "f            Toggle fullscreen.",
         "g            Toggle grid.",
+        "h, ? or ESC  View/dismiss this help.",
         "q            Quit CAD Viewer.",
         "w            Toggle wireframe.",
         "z            Reset view.",
@@ -35,13 +36,19 @@ def display_help():
     for t in text_l:
         if longest < len(t):
             longest = len(t)
-    root = Tk()
-    x = (longest+4)*12
-    y = (len(text_l)+10)*12
+    root = Tk()  
+    def keydown(e):
+        ch = e.char
+        if ch == 'h' or ch == '?' or ord(ch) == 27 or ord(ch) == 13:
+            root.destroy()
+    root.bind('<KeyPress>', keydown)
+
+    x = (longest)*14
+    y = (len(text_l)+10)*14
     root.geometry(f"{x}x{y}")
     root.title("CAD Viewer Help")
-    text = Text(root, height=len(text_l))
-    text.insert('1.0', "\n        ".join(text_l))
+    text = Label(root, height=len(text_l), justify="left",
+                 text="\n".join(text_l), font=("Courier", 14, 'bold'))
     text.pack(padx=10, pady=10)
     root.mainloop()
 
