@@ -9,6 +9,42 @@ import os
 
 view_lock = Lock()
 
+def display_help():
+    from tkinter import Tk, Text
+    text_l = [
+        "",
+        "Key        Action",
+        "---------------------------------------------",
+        "a            Toggle axis.",
+        "c            Toggle culling.",
+        "f            Toggle fullscreen.",
+        "g            Toggle grid.",
+        "q            Quit CAD Viewer.",
+        "w            Toggle wireframe.",
+        "z            Reset view.",
+        "LEFT         Move to the previous object.",
+        "RIGHT        Move to the next object.",
+        "SHIFT-m      Launch meshlab on current object.",
+        "SHIFT-LEFT   Rotate image left.",
+        "SHIFT-RIGHT  Rotate image right.",
+        "SHIFT-UP     Rotate image up.",
+        "SHIFT-DOWN   Rotate image down.",
+        "",
+    ]
+    longest = 0
+    for t in text_l:
+        if longest < len(t):
+            longest = len(t)
+    root = Tk()
+    x = (longest+4)*12
+    y = (len(text_l)+10)*12
+    root.geometry(f"{x}x{y}")
+    root.title("CAD Viewer Help")
+    text = Text(root, height=len(text_l))
+    text.insert('1.0', "\n        ".join(text_l))
+    text.pack(padx=10, pady=10)
+    root.mainloop()
+
 display_needed = False
 cur_idx = 0
 meshes = []
@@ -47,6 +83,8 @@ class MySceneViewer(trimesh.viewer.windowed.SceneViewer):
             return # Doesn't really work right, supress.
         elif symbol == pyglet.window.key.F:
             self.toggle_fullscreen()
+        elif symbol == pyglet.window.key.H or symbol == pyglet.window.key.QUESTION:
+            Thread(target=display_help, daemon=True).start()
 
         if symbol in [
             pyglet.window.key.LEFT,
@@ -105,6 +143,7 @@ def _queue_handler():
 
 server.start_server()
 Thread(target=_queue_handler, daemon=True).start()
+
 
 window = None
 
