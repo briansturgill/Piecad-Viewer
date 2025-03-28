@@ -134,14 +134,16 @@ def _queue_handler():
                 display_needed = True
                 cur_idx = 0
             else:
-                display_needed = True
                 vertices = np.array(obj["vertices"], np.float64)
                 faces = np.array(obj["faces"], np.int64)
                 mesh = trimesh.Trimesh(vertices, faces)
+                if mesh.is_empty:
+                    raise Exception("Bad mesh received")
                 mesh.visual.vertex_colors = obj["color"]
                 meshes.append(mesh)
                 titles.append(obj["title"])
                 cur_idx = len(meshes)-1
+                display_needed = True
         except Exception as err:
             print("Exception:", err)
             pass
@@ -170,8 +172,8 @@ def cb(scene: trimesh.Scene):
             scene = window.scene = window._scene = scene2
             cur_mesh = scene.add_geometry(mesh)
             window.reset_view()
-            #window.view["ball"].scroll(-(mesh.bounds[1,1]-mesh.bounds[0,1])*0.2)
-            #window.scene.camera_transform = window.view["ball"].pose
+            window.view["ball"].scroll(-(mesh.bounds[1,1]-mesh.bounds[0,1])*0.2)
+            window.scene.camera_transform = window.view["ball"].pose
         else:
             window.set_caption(f"CAD Viewer - #0 of 0")
         changed = True
@@ -180,7 +182,7 @@ def cb(scene: trimesh.Scene):
     return changed
 
 scene = trimesh.Scene()
-cur_mesh = scene.add_geometry(trimesh.creation.box((100, 100, 100)))
+cur_mesh = scene.add_geometry(trimesh.creation.box((10000, 10000, 10000)))
 window = MySceneViewer(scene, callback=cb, callback_period=1.0, start_loop=False,
                               background=(173,216,230,255), smooth=False)
 scene.delete_geometry(cur_mesh)
