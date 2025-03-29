@@ -1,3 +1,4 @@
+rm -rf lib lib64 include bin share pyvenv.cfg __pycache__
 /usr/bin/python -m venv .
 . bin/activate
 pip install trimesh 'pyglet<2' glooey scipy 
