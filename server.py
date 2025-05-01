@@ -2,10 +2,11 @@ from http.server import ThreadingHTTPServer, BaseHTTPRequestHandler
 from threading import Thread
 from queue import Queue
 
-addr="127.0.0.1"
-port=8037
+addr = "127.0.0.1"
+port = 8037
 
 viewQueue = Queue()
+
 
 class CADViewerHandler(BaseHTTPRequestHandler):
     def do_POST(self):
@@ -21,8 +22,10 @@ class CADViewerHandler(BaseHTTPRequestHandler):
             pass
         viewQueue.put(data)
 
+
 def start_server():
     Thread(target=_start_server, daemon=True).start()
+
 
 def _start_server():
     print(addr, port)
@@ -32,6 +35,7 @@ def _start_server():
     except KeyboardInterrupt:
         pass
     httpd.server_close()
+
 
 if __name__ == "__main__":
     start_server()
