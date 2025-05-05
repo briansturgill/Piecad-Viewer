@@ -14,7 +14,7 @@ To install:
 pip install piecad_viewer
 
 # This will install the script:
-piecad_viewer
+piecad-viewer
 
 ```
 
