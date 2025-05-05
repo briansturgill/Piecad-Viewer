@@ -1,5 +1,5 @@
 import pyglet
-import server
+from . import server
 from threading import Thread, Lock
 import json
 import numpy as np
@@ -197,18 +197,19 @@ def cb(scene: trimesh.Scene):
     return changed
 
 
-scene = trimesh.Scene()
-cur_mesh = scene.add_geometry(trimesh.creation.box((100, 100, 100)))
-window = MySceneViewer(
-    scene,
-    callback=cb,
-    callback_period=1.0,
-    start_loop=False,
-    background=(173, 216, 230, 255),
-    smooth=False,
-)
-scene.delete_geometry(cur_mesh)
-window.set_caption(f"CAD Viewer - #0 of 0")
-import pyglet
+def main():
+    global cur_mesh, window
+    scene = trimesh.Scene()
+    cur_mesh = scene.add_geometry(trimesh.creation.box((100, 100, 100)))
+    window = MySceneViewer(
+        scene,
+        callback=cb,
+        callback_period=1.0,
+        start_loop=False,
+        background=(173, 216, 230, 255),
+        smooth=False,
+    )
+    scene.delete_geometry(cur_mesh)
+    window.set_caption(f"CAD Viewer - #0 of 0")
 
-pyglet.app.run()
+    pyglet.app.run()

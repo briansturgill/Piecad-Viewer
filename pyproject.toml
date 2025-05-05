@@ -16,6 +16,9 @@ dependencies = [
 		"scipy >= 1.15.2"
 ]
 
+[project.scripts]
+piecad-viewer = "piecad_viewer:main"
+
 [project.urls]
 Home = "https://github.com/briansturgill/Piecad-Viewer"
 
