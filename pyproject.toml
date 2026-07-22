@@ -19,6 +19,9 @@ dependencies = [
 [project.scripts]
 piecad-viewer = "piecad_viewer:main"
 
+[project.gui.scripts]
+piecad-viewer = "piecad_viewer:main"
+
 [project.urls]
 Home = "https://github.com/briansturgill/Piecad-Viewer"
 

@@ -6,6 +6,7 @@ share
 lib64
 .benchmarks
 include
+Scripts
 __pycache__
 test.py
 pyvenv.cfg
