@@ -5,7 +5,7 @@ build-backend = "flit_core.buildapi"
 [project]
 name = "piecad_viewer"
 description = '"Viewer for Easy as Pie" CAD (Piecad)'
-version = "1.0.0"
+version = "1.0.1"
 authors = [{name = "Brian Sturgill", email = "codersnext@gmail.com"}]
 license = {file = "LICENSE"}
 classifiers = ["License :: OSI Approved :: MIT License"]
@@ -19,7 +19,7 @@ dependencies = [
 [project.scripts]
 piecad-viewer = "piecad_viewer:main"
 
-[project.gui.scripts]
+[project.gui-scripts]
 piecad-viewer = "piecad_viewer:main"
 
 [project.urls]
