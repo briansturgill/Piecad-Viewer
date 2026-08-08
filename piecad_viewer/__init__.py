@@ -200,6 +200,7 @@ def cb(scene: trimesh.Scene):
 def main():
     global cur_mesh, window
     scene = trimesh.Scene()
+    width, height = scene.camera.resolution
     cur_mesh = scene.add_geometry(trimesh.creation.box((100, 100, 100)))
     window = MySceneViewer(
         scene,
@@ -208,6 +209,7 @@ def main():
         start_loop=False,
         background=(173, 216, 230, 255),
         smooth=False,
+	resolution=(int(width*0.5), int(height*0.5))
     )
     scene.delete_geometry(cur_mesh)
     window.set_caption(f"CAD Viewer - #0 of 0")

@@ -28,8 +28,9 @@ def start_server():
 
 
 def _start_server():
-    print("Viewer server started on (", addr, port, ")")
     httpd = ThreadingHTTPServer((addr, port), CADViewerHandler)
+    httpd.allow_reuse_address = True
+    print("Viewer server started on (", addr, port, ")")
     try:
         httpd.serve_forever()
     except KeyboardInterrupt:
@@ -38,6 +39,10 @@ def _start_server():
 
 
 if __name__ == "__main__":
+    hptmp = os.environ.get("PIECAD_VIEWER", None)
+    if hptmp != None:
+        addr, port = htmp.split(':')
+        port = int(port)
     start_server()
     print("^C to exit.")
     while True:
