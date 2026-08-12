@@ -28,8 +28,8 @@ def start_server():
 
 
 def _start_server():
+    Threading.HTTPServer.allow_reuse_address = True
     httpd = ThreadingHTTPServer((addr, port), CADViewerHandler)
-    httpd.allow_reuse_address = True
     print("Viewer server started on (", addr, port, ")")
     try:
         httpd.serve_forever()
