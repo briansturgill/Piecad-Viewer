@@ -28,7 +28,7 @@ def start_server():
 
 
 def _start_server():
-    Threading.HTTPServer.allow_reuse_address = True
+    ThreadingHTTPServer.allow_reuse_address = True
     httpd = ThreadingHTTPServer((addr, port), CADViewerHandler)
     print("Viewer server started on (", addr, port, ")")
     try:
