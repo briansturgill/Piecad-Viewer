@@ -152,7 +152,7 @@ def _queue_handler():
                 vertices = np.array(obj["vertices"], np.float64)
                 faces = np.array(obj["faces"], np.int64)
                 mesh = trimesh.Trimesh(vertices, faces)
-                mesh.visual.vertex_colors = obj["color"]
+                mesh.visual.face_colors = obj["color"]
                 meshes.append(mesh)
                 titles.append(obj["title"])
                 cur_idx = len(meshes) - 1
