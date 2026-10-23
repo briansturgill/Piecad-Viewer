@@ -1,5 +1,7 @@
 # Viewer for "Easy as Pie" CAD (Piecad)
 
+# This project is now defunct. It was replaced by a build in matplotlib viewer.
+
 [Piecad](https://github.com/briansturgill/Piecad) is a CAD API used to construct 3D models in [Python](https://www.python.org).
 Its primary focus is the creation of models for 3D printing.
 
